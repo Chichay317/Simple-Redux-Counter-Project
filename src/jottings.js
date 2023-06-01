@@ -1,0 +1,10 @@
+// components never directly manipulate the data in the store. the reducer function is responsible for changing the store data. components dispatch/trigger certain actions which describes what should be done though they don't do it directly to the reducer function, then the reducer function carries out the actions and then changes the data in the store. components that subscribed to the store are notified and then that changes the UI.
+// the reducer function must be a pure function (the same input leads to the same output, there should be no http requests or any other type of requests) and it will receive the current state and the action that was dispatched.
+// to run redux for react (since it's not react specific), run npm install redux react-redux
+// useSelector lets us use a part of our state managed by redux
+// the new state object that the reducer function returns will not be merged with the existing state, it will replace the existing state
+// when working with redux, never mutate the existing state. that's why we always return a new state object
+// to install redux toolkit, we use npm install @reduxjs/toolkit. we can also get rid of the redux installation after installing redux toolkit
+// we use createSlice also if we have multiple states that are not closely related to each other, and it expects an object. the object will have a name property (a unique identifier), an initial state and a reducer function
+// we should still never mutate a state but when using redux toolkit, it makes sure that we never (accidentally or not) mutate the state through the use of immer (a package it uses internally which clones the existing state, keeps the unchanged one, and overrides the one that changed)
+// createSlice automatically creates unique action identifiers for the reducers. we can access this by using .actions on the slice name. by doing this, we get all the keys of the methods defined in our reducer, but we don't access the reducer methods. rather, redux toolkit creates methods which when called will create action objects for us. the action objects already contain a type property with a unique identifier per action
